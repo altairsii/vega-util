@@ -1,0 +1,9 @@
+/target/
+/.settings/
+*.zip
+*.rar
+*.via
+*.tmp
+*.err
+.project
+.classpath
