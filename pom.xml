@@ -8,6 +8,8 @@
 	<modules>
 		<module>vega-json-util</module>
 		<module>vega-json-util-fastjson</module>
+		<module>vega-util-log</module>
+		<module>vega-util-base</module>
 	</modules>
 
 	<properties>
