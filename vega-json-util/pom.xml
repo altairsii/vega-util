@@ -6,4 +6,11 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>vega-json-util</artifactId>
+  <dependencies>
+  	<dependency>
+  		<groupId>vega-util</groupId>
+  		<artifactId>vega-json-util-fastjson</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
 </project>
