@@ -10,6 +10,7 @@
 		<module>vega-json-util-fastjson</module>
 		<module>vega-util-log</module>
 		<module>vega-util-base</module>
+		<module>vega-util-mq</module>
 	</modules>
 
 	<properties>
