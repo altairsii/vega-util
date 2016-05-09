@@ -32,6 +32,7 @@
 		<spring.redis.version>1.5.0.RELEASE</spring.redis.version>
 		<jedis.version>2.7.0</jedis.version>
 		<spring.web.version>3.2.0.RELEASE</spring.web.version>
+		<activemq.version>5.7.0</activemq.version>
 	</properties>
 
 	<dependencyManagement>
@@ -92,8 +93,6 @@
 				<artifactId>mysql-connector-java</artifactId>
 				<version>${mysql.version}</version>
 			</dependency>
-			<!-- <dependency> <groupId>com.alibaba</groupId> <artifactId>fastjson</artifactId> 
-				<version>${fastjson.version}</version> </dependency> -->
 			<dependency>
 				<groupId>org.apache.maven</groupId>
 				<artifactId>maven-plugin-api</artifactId>
@@ -113,6 +112,11 @@
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-web</artifactId>
 				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.activemq</groupId>
+				<artifactId>activemq-core</artifactId>
+				<version>${activemq.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
