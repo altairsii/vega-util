@@ -10,11 +10,6 @@
 	<artifactId>vega-util-mq</artifactId>
 	<dependencies>
 		<dependency>
-			<groupId>vega-util-log</groupId>
-			<artifactId>vega-util-log</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-core</artifactId>
 		</dependency>
