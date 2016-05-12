@@ -15,7 +15,7 @@ import com.vega.mq.base.MQSession;
 public class ActiveMQConsumer {
 
 	public static MessageConsumer getActiveMQConsumer(String url, int confirm) throws JMSException {
-		Session session = MQSession.MQSession(url, confirm);
+		Session session = MQSession.getMQSession(url, confirm);
 		Destination destination = session.createTopic("");
 		return session.createConsumer(destination);
 	}

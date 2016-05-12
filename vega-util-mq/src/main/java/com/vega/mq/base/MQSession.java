@@ -34,7 +34,7 @@ public class MQSession {
 	 * @return
 	 * @throws JMSException
 	 */
-	public static Session MQSession(String url, int confirm) throws JMSException {
+	public static Session getMQSession(String url, int confirm) throws JMSException {
 		connection = getConnection(url).createConnection();
 		connection.start();
 		return connection.createSession(false, confirm);
