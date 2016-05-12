@@ -3,28 +3,28 @@ package com.vega.mq.base;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.jms.Connection;
-import javax.jms.ConnectionFactory;
 import javax.jms.JMSException;
-import javax.jms.MessageListener;
 import javax.jms.Session;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.springframework.beans.factory.support.FactoryBeanRegistrySupport;
+import org.apache.activemq.pool.PooledConnection;
+import org.apache.activemq.pool.PooledConnectionFactory;
+
+import com.vega.mq.constants.ActiveMQConstant;
 
 public class MQSession {
 
 	/**
 	 * 全局唯一的工厂控制
 	 */
-	private static Map<String, ConnectionFactory> factorys = new HashMap<String, ConnectionFactory>();
+	private static Map<String, PooledConnection> factorys = new HashMap<String, PooledConnection>();
 
 	/**
 	 * 链接工厂
 	 */
-	private static ConnectionFactory connectionFactory;
+	private static ActiveMQConnectionFactory connectionFactory;
 
-	private static Connection connection;
+	private static PooledConnection connection;
 
 	/**
 	 * 通过url获取Session
@@ -34,8 +34,8 @@ public class MQSession {
 	 * @return
 	 * @throws JMSException
 	 */
-	public static Session getMQSession(String url, int confirm) throws JMSException {
-		connection = getConnection(url).createConnection();
+	public static Session getMQSession(String url, String clientId,int confirm) throws JMSException {
+		connection = ((PooledConnection) getConnection(url, clientId));
 		connection.start();
 		return connection.createSession(false, confirm);
 	}
@@ -44,13 +44,21 @@ public class MQSession {
 	 * 通过url获取连接工厂
 	 * @param url
 	 * @return
+	 * @throws JMSException 
 	 */
-	private static ConnectionFactory getConnection(String url) {
+	private static PooledConnection getConnection(String url,String clientId) throws JMSException {
 		if (factorys.containsKey(url)) {
 			return factorys.get(url);
 		}
 		connectionFactory = new ActiveMQConnectionFactory(url);
-		factorys.put(url, connectionFactory);
-		return connectionFactory;
+		PooledConnectionFactory pooledFactory = new PooledConnectionFactory(connectionFactory);
+		pooledFactory.setMaxConnections(ActiveMQConstant.MAX_CONNECTIONS);
+		pooledFactory.setMaximumActiveSessionPerConnection(ActiveMQConstant.DEFAULT_MAXIMUM_ACTIVE_SESSION_PER_CONNECTION);
+		pooledFactory.setIdleTimeout(ActiveMQConstant.DEFAULT_IDLETIMEOUT);
+		pooledFactory.createConnection();
+		connection.setClientID(clientId);
+		connection.start();
+		factorys.put(url, connection);
+		return connection;
 	}
 }

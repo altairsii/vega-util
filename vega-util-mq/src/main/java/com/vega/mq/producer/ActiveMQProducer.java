@@ -14,8 +14,8 @@ import com.vega.mq.base.MQSession;
  */
 public class ActiveMQProducer {
 
-	public static MessageProducer getActiveMQProducer(String url, int confirm) throws JMSException {
-		Session session = MQSession.getMQSession(url, confirm);
+	public static MessageProducer getActiveMQProducer(String url, String clientId,int confirm) throws JMSException {
+		Session session = MQSession.getMQSession(url,clientId, confirm);
 		Destination destination = session.createTopic("");
 		return session.createProducer(destination);
 	}
