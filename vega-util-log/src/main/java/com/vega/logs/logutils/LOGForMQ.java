@@ -1,12 +1,33 @@
 package com.vega.logs.logutils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 
 public class LOGForMQ implements Logger {
 
+	private static LOGForMQ logger;
+
+	private static Map<String, LOGForMQ> logForMQMap = new HashMap<String, LOGForMQ>();
+
+	private Logger getInstance(Class<?> clazz, String clientId) {
+		if (logForMQMap.containsKey(clientId)) {
+			return logForMQMap.get(clientId);
+		}
+
+		logger = new LOGForMQ();
+		logForMQMap.put(clientId, logger);
+		return logger;
+
+	}
+
 	public static Logger getLogger(Class<?> clazz, String clientId) {
-		return null;
+		if(null == logger){
+			logger = new LOGForMQ();
+		}
+		return logger.getInstance(clazz, clientId);
 	}
 
 	@Override
