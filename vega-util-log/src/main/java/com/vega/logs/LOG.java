@@ -1,7 +1,6 @@
 package com.vega.logs;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.vega.logs.logutils.LOGForLogback;
 import com.vega.logs.logutils.LOGForMQ;
